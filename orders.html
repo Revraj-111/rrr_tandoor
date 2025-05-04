@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-4">
+    <h2>Orders</h2>
+    <table class="table table-bordered" id="data-table">
+        <thead>
+            <tr>
+                <th>Items</th>
+                <th>Order ID</th>
+                <th>Timestamp</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<script type="module">
+    // Import Firebase modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+    import { getFirestore, collection, getDocs, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyDM08PbY2agccbecoyBe4sAgjO2jH00x8E",
+        authDomain: "restaurant-website-32bf6.firebaseapp.com",
+        databaseURL: "https://restaurant-website-32bf6-default-rtdb.firebaseio.com",
+        projectId: "restaurant-website-32bf6",
+        storageBucket: "restaurant-website-32bf6.appspot.com",
+        messagingSenderId: "493995884129",
+        appId: "1:493995884129:web:3edff4b4aa4583f0917420",
+        measurementId: "G-0S5XT6D3X7"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Reference to your Firestore collection (replace 'orders' with your actual collection name)
+    const querySnapshot = await getDocs(collection(db, "orders"));
+
+    const tableBody = document.querySelector("#data-table tbody");
+
+    querySnapshot.forEach((doc) => {
+        const data = doc.data(); // Get data from Firestore document
+        const row = document.createElement("tr");
+
+        // Map through items and display the id, name, price, and quantity
+        const itemsList = data.items ? data.items.map(item => 
+            `<li>ID: ${item.id}, Name: ${item.name}, Price: $${item.price}, Quantity: ${item.quantity}</li>`
+        ).join("") : "No items available";
+
+        row.innerHTML = `
+            <td><ul>${itemsList}</ul></td> <!-- Display items as a list with id, name, price, quantity -->
+            <td>${data.orderId || "N/A"}</td> <!-- Order ID -->
+            <td>${new Date(data.timestamp?.seconds * 1000).toLocaleString() || "N/A"}</td> <!-- Timestamp -->
+            <td>${data.total || "N/A"}</td> <!-- Total -->
+            <td><button class="btn btn-danger" onclick="deleteRow('${doc.id}')">Delete</button></td>
+        `;
+
+        tableBody.appendChild(row);
+    });
+
+    // Optional: Add delete functionality to remove items from Firestore (ensure to configure delete logic)
+    async function deleteRow(docId) {
+        try {
+            const docRef = doc(db, "orders", docId); // Reference to Firestore document
+            await deleteDoc(docRef); // Delete document from Firestore
+            alert("Item deleted successfully!");
+            location.reload(); // Reload to update table after deletion
+        } catch (error) {
+            console.error("Error deleting document: ", error);
+        }
+    }
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js"></script> <!-- Ensure Firestore script is loaded -->
+</body>
+</html>

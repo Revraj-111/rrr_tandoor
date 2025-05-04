@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restaurant Navbar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Background settings */
+        body {
+            background-image: url("https://images.pexels.com/photos/10749578/pexels-photo-10749578.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+        }
+
+        .plog a {
+            text-decoration: none;
+            color: rgb(170, 17, 17);
+            transition: box-shadow 0.3s ease, color 0.3s;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        
+       
+        .op a {
+            text-decoration: none;
+            color: white;
+            transition: box-shadow 0.3s ease, color 0.3s;
+            padding: 5px 10px;
+            border-radius: 5px;
+          }
+          
+          .op a:hover {
+            color: #00ffff; /* cyan glow color */
+            box-shadow: 0 0 25px 6px rgba(0, 255, 255, 0.6);
+          }
+        /* Navbar */
+        #bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 50px;
+            background: linear-gradient(90deg, rgba(164,118,51,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,1) 60%, rgba(164,118,51,1) 100%);
+        }
+
+        #items, #items1 {
+            display: flex;
+            gap: 200px;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-size: 45px;
+        }
+        
+        #center-icon {
+            background-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          
+          #center-icon img {
+            height: 80px;
+            width: auto;
+            border-radius: 50px; 
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.6); 
+          }
+          
+        .op {
+            color: #ffcc00;
+        }
+
+        /* Video and Background Section */
+        #video-container {
+            display: flex;
+            width: 100%;
+            height: 500px;
+        }
+
+        #vid {
+            width: 40%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #vid video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #bg-section {
+            width: 60%;
+            height: 100%;
+            background: #000000;
+background: linear-gradient(0deg,rgba(0, 0, 0, 1) 0%, rgba(156, 110, 20, 1) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            color: white;
+            font-size: 24px;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        /* Hindi Tagline */
+        .hindi-tagline {
+            position: absolute;
+            top: 50%; /* Moved up from 60% to 50% */
+            text-align: center;
+            color: white;
+            font-family: 'Kalam', cursive;
+            font-size: 24px;
+            line-height: 1.4;
+            max-width: 90%;
+            padding: 15px 25px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            border-left: 4px solid #ffcc00;
+            border-right: 4px solid #ffcc00;
+        }
+
+        .hindi-tagline .emoji {
+            font-size: 28px;
+            vertical-align: middle;
+            margin: 0 5px;
+        }
+
+        /* Comment Box */
+        .comment-box {
+            position: absolute;
+            top: 20px;
+            left: 10%;
+            width: 80%;
+            height: 45%; /* Reduced from 55% to 45% */
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 30px; 
+            overflow: hidden;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .comment-title {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #271414;
+        }
+
+        .comment-slider {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            margin-top: 40px; 
+        }
+
+        .comment {
+            position: absolute;
+            width: 100%;
+            font-size: 28px;
+            color: rgb(255, 255, 255);
+            font-style: italic;
+            opacity: 0;
+            animation: fadeInOut 9s infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 10px; 
+        }
+
+        .comment:nth-child(1) { animation-delay: 0s; }
+        .comment:nth-child(2) { animation-delay: 3s; }
+        .comment:nth-child(3) { animation-delay: 6s; }
+
+        .stars {
+            color: gold;
+            font-size: 36px;
+            margin-top: 15px; 
+        }
+
+        .customer-name {
+            font-size: 20px;
+            font-style: normal;
+            margin-top: 10px;
+            align-self: flex-end;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            30% { opacity: 1; }
+            40% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+        a:active {
+            color: #000000;
+          }
+          a:visited {
+            color: #000000; 
+          }
+        /* Buttons */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 300px; 
+            gap: 40px;
+        }
+
+        .custom-btn {
+            padding: 20px 80px; 
+            font-size: 24px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+            text-align: center;
+            min-width: 220px; /* Increased from 180px to 220px */
+            min-height: 70px; /* Increased from 60px to 70px */
+        }
+
+        .menu-btn {
+            background-color: #ffcc00;
+    color: black;
+        }
+
+        .menu-btn:hover {
+            background-color: #e6b800;
+        }
+
+        .reservation-btn {
+            background-color: #ff5733;
+            color: white;
+        }
+
+        .reservation-btn:hover {
+            background-color: #cc4626;
+        }
+
+        .strip-container {
+            width: 100%;
+            height: 50px;
+            background-color: #000000;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .marquee {
+            white-space: nowrap;
+            font-size: 26px;
+            color: rgb(255, 255, 255);
+            font-weight: bold;
+            width: 100%;
+            overflow: hidden;
+            position: absolute;
+        }
+        .marquee div {
+            display: inline-block;
+            white-space: nowrap; /* Keeps the text in one line */
+            animation: marquee 10s linear infinite;
+        }
+        
+        .line {
+            margin-right: 150px; /* Space between each sentence */
+            font-size: 24px; /* Adjust font size if needed */
+            font-weight: bold;
+            color: #fff; /* Adjust text color */
+        }
+        
+        @keyframes marquee {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* Menu Grid Section (NEW) */
+        .menu-grid-section {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 40px 0;
+        }
+
+        .menu-grid-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .menu-grid-title {
+            color: #d3581f;
+            text-align: center;
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .menu-item {
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .menu-item-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .menu-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .menu-item:hover .menu-item-image img {
+            transform: scale(1.1);
+        }
+
+        .menu-item-content {
+            padding: 20px;
+            color: white;
+        }
+
+        .menu-item-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ffcc00;
+        }
+
+        .menu-item-description {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #e0e0e0;
+        }
+
+        .menu-item-price {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ff5733;
+            margin-bottom: 15px;
+        }
+
+        .counter-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .counter {
+            display: flex;
+            align-items: center;
+        }
+
+        .counter-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .counter-btn.minus {
+            background-color: #ff5733;
+            color: white;
+        }
+
+        .counter-btn.plus {
+            background-color: #ffcc00;
+            color: black;
+        }
+
+        .counter-value {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0 15px;
+            color: white;
+        }
+
+        .section-divider {
+            height: 5px;
+            background: linear-gradient(90deg, #ff5733, #ffcc00, #ff5733);
+            margin: 0;
+        }
+
+        /* Total Bill Section (NEW) */
+        .total-bill-section {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 30px 0;
+            position: relative;
+            bottom: 0px;
+            width: 100%;
+            z-index: 100;
+            border-top: 4px solid #ffcc00;
+        }
+
+        .total-bill-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .total-bill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .total-bill-title {
+            color: #ffcc00;
+            font-size: 32px;
+            font-weight: bold;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+
+        .total-bill-amount {
+            color: white;
+            font-size: 36px;
+            font-weight: bold;
+            background-color: #ff5733;
+            padding: 5px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .selected-items {
+            max-height: 200px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .selected-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .selected-item:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .selected-item-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .selected-item-title {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .selected-item-quantity {
+            background-color: #ffcc00;
+            color: black;
+            font-weight: bold;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 16px;
+        }
+
+        .selected-item-price {
+            color: #ff5733;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .checkout-btn {
+            background-color: #00cc66;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 40px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            display: block;
+            margin: 20px auto 0;
+            min-width: 250px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .checkout-btn:hover {
+            background-color: #00aa55;
+            transform: translateY(-3px);
+        }
+
+        .empty-cart {
+            color: #aaa;
+            text-align: center;
+            font-style: italic;
+            padding: 20px;
+            font-size: 18px;
+        }
+
+        @media (max-width: 992px) {
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        hr{background-color: #00aa55;}
+
+        .gold-line-inside {
+            width: 90%;
+            height: 4px;
+            background: linear-gradient(to right, #d4af37, #f5e19d, #d4af37);
+            border-radius: 5px;
+            position: absolute;
+            top: 0;
+            left: 5%;
+          }
+          
+          .fot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            background: #111; /* Change to match your site theme */
+            width: 100%;
+            height: 300px;
+            padding-top: 20px;
+            color: #fff;
+            font-size: 24px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            
+          }
+          
+          .add,
+          .phone,
+          .plog {
+            flex: 1;
+            text-align: center;
+          }
+          
+          .add {
+            text-align: left;
+          }
+          
+          .plog {
+            text-align: right;
+          }
+          a {
+            color: inherit !important;
+            text-decoration: none !important;
+          }
+          .admin-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 2290px;
+            padding: 8px 16px;
+            background: gold;
+            color: #111;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+          }
+          
+          .admin-btn:hover {
+            background: #e5c100;
+          }
+          
+          .login-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+          }
+          
+          .modal-content {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+          }
+          
+          .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            margin-bottom: 20px;
+            font-size: 16px;
+          }
+          
+          .modal-buttons button {
+            padding: 8px 16px;
+            margin: 0 5px;
+            font-weight: bold;
+            cursor: pointer;
+          }
+          
+          
+    </style>
+   
+</head>
+<body>
+
+    
+    <nav id="bar">
+        <div id="items">
+          <div id="nam" class="op"><a href="video.html" target="_blank"> Glimpse </a></div>
+          <div id="cla" class="op"> <a href="vision.html"> Vision </a></div>
+          <div id="stu" class="op"><a href="infra.html">Infrastructure </a></div>
+        </div>
+      
+        <!-- Center image in navbar -->
+        <div id="center-icon">
+          <img src="WhatsApp Image 2025-03-31 at 6.06.54 PM.jpeg" alt="logo"  />
+        </div>
+      
+        <div id="items1">
+          <div id="namr" class="op"><a href="reservations.html" target="_blank">Reservation </a></div>
+          <div id="clar" class="op"><a href="menu.html" target="_blank">Menu </a></div>
+          <div id="stur" class="op"><a href="about.html">Our Staff </a></div>
+        </div>
+      </nav>
+
+    <div id="video-container">
+        <div id="vid">
+            <video autoplay loop muted>
+                <source src="assets\Video.Guru_20250331_221425446.mp4" type="video/mp4">
+            </video> 
+        </div>
+
+        <div id="bg-section">
+            <div class="comment-box">
+                <div class="comment-title"><u>What Our Customers Said</u></div>
+                <div class="comment-slider">
+                    <div class="comment">
+                        "Amazing food and great service!"
+                        <div class="stars">★★★★★</div>
+                        <div class="customer-name">- Varinder Singh</div>
+                    </div>
+                    <div class="comment">
+                        "Best restaurant in town! Highly recommended."
+                        <div class="stars">★★★★☆</div>
+                        <div class="customer-name">- Rohan Sharma</div>
+                    </div>
+                    <div class="comment">
+                        "Loved the ambiance, will come again!"
+                        <div class="stars">★★★★★</div>
+                        <div class="customer-name">- Shikha Gupta</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hindi-tagline">
+                "Har swaad mein base pyaar ki khushbu, har pakwan mein ghar jaisa apnapan – swaad jo dil ko chhoo jaaye!" <span class="emoji">🍛❤️</span>
+            </div>
+            
+            <div class="button-container">
+                <button class="custom-btn menu-btn">
+                    <i class="bi bi-list"></i> <a href="#bmo" > <a href="menu.html" target="_blank">Dine In</a>
+                </button>
+                <button class="custom-btn reservation-btn"> 
+                    <i class="bi bi-calendar-check"></i> <a href="reservations.html" target="_blank">Reservation </a>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="strip-container">
+        <div class="marquee">
+            <div>
+                <span class="line">Swaad jo dil se aaye, woh yahan mile!</span>
+                <span class="line">Flavors that speak the language of love!</span>
+                <span class="line">Jitho khana naal pyaar vi milda!!</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu Grid Section -->
+    <hr class="section-divider">
+    <section class="menu-grid-section">
+        <div class="menu-grid-container">
+            <h2 class="menu-grid-title" id="bmo">Our Menu</h2>
+            <div class="menu-grid">
+                <!-- Menu Item 1 -->
+                <div class="menu-item" data-id="1" data-name="Grilled Steak" data-price="300">
+                    <div class="menu-item-image">
+                        <img src="pexels-photo-769289.jpeg" alt="Steak">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-title"><a href="grilled_steak.html">Grilled Steak </a></h3>
+                        <p class="menu-item-description">Premium cut beef grilled to perfection with herb butter</p>
+                        <div class="menu-item-price">Rs.300</div>
+                        <div class="counter-container">
+                            <div class="counter">
+                                <button class="counter-btn minus">-</button>
+                                <span class="counter-value">0</span>
+                                <button class="counter-btn plus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Item 2 -->
+                <div class="menu-item" data-id="2" data-name="Tandoori Platter" data-price="600">
+                    <div class="menu-item-image">
+                        <img src="pexels-photo-2474661.webp" alt="Tandoori">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-title"><a href="tandoori_platter.html">Tandoori Platter </a></h3>
+                        <p class="menu-item-description">Assorted tandoor specialties with mint chutney</p>
+                        <div class="menu-item-price">Rs.600</div>
+                        <div class="counter-container">
+                            <div class="counter">
+                                <button class="counter-btn minus">-</button>
+                                <span class="counter-value">0</span>
+                                <button class="counter-btn plus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Item 3 -->
+                <div class="menu-item" data-id="3" data-name="Butter Chicken" data-price="500">
+                    <div class="menu-item-image">
+                        <img src="pexels-photo-3026808.jpeg" alt="Curry">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-title"><a href="butter_chicken.html">Butter Chicken </a></h3>
+                        <p class="menu-item-description">Tender chicken in a rich tomato cream sauce</p>
+                        <div class="menu-item-price">Rs.500</div>
+                        <div class="counter-container">
+                            <div class="counter">
+                                <button class="counter-btn minus">-</button>
+                                <span class="counter-value">0</span>
+                                <button class="counter-btn plus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Item 4 -->
+                <div class="menu-item" data-id="4" data-name="Fresh Garden Salad" data-price="100">
+                    <div class="menu-item-image">
+                        <img src="pexels-jill-wellington-1638660-257816.jpg" alt="Salad">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-title"><a href="fresh_garden_salad.html">Fresh Garden Salad </a></h3>
+                        <p class="menu-item-description">Seasonal vegetables with homemade dressing</p>
+                        <div class="menu-item-price">Rs.100</div>
+                        <div class="counter-container">
+                            <div class="counter">
+                                <button class="counter-btn minus">-</button>
+                                <span class="counter-value">0</span>
+                                <button class="counter-btn plus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Item 5 -->
+                <div class="menu-item" data-id="5" data-name="Special Biryani" data-price="800">
+                    <div class="menu-item-image">
+                        <img src="pexels-photo-3655916.jpeg" alt="Biryani">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-title"> <a href="Special_Biryani.html">Special Biryani </a></h3>
+                        <p class="menu-item-description">Aromatic basmati rice with choice of protein</p>
+                        <div class="menu-item-price">Rs.800</div>
+                        <div class="counter-container">
+                            <div class="counter">
+                                <button class="counter-btn minus">-</button>
+                                <span class="counter-value">0</span>
+                                <button class="counter-btn plus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Item 6 -->
+                <div class="menu-item" data-id="6" data-name="Rice Chicken" data-price="200">
+                    <div class="menu-item-image">
+                        <img src="chicken-7249273_1280.jpg" alt="Rice Chicken">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-title"><a href="rice_chicken.html">Rice Chicken </a></h3>
+                        <p class="menu-item-description">Flavorful chicken and rice</p>
+                        <div class="menu-item-price">Rs.200</div>
+                        <div class="counter-container">
+                            <div class="counter">
+                                <button class="counter-btn minus">-</button>
+                                <span class="counter-value">0</span>
+                                <button class="counter-btn plus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Total Bill -->
+    <section class="total-bill-section">
+        <div class="total-bill-container">
+            <div class="total-bill-header">
+                <h2 class="total-bill-title">Your Order</h2>
+                <div class="total-bill-amount">Rs.0.00</div>
+            </div>
+            <div class="selected-items">
+                <div class="empty-cart">Your cart is empty. Add items to see them here!</div>
+            </div>
+            <button class="checkout-btn">
+                <i class="bi bi-credit-card"></i> Checkout
+            </button>
+        </div>
+    </section>
+
+
+    <div class="fot">
+        <div class="gold-line-inside"></div> <!-- golden line inside the footer -->
+        <div class="add">
+          <span>
+            123 Tandoori Lane, Spice City<br />
+            Culinary Block, Near Main Bazaar
+          </span>
+        </div>
+        <div class="phone">
+          +91 67940 4456
+        </div>
+        <div class="plog">
+          Follow us: <a href="https://www.facebook.com/share/16C3tFSveH/">Facebook</a> | <a href="https://www.instagram.com/rajan_theking/?hl=en">Instagram</a> | Twitter
+        </div>
+        <button class="admin-btn" onclick="openLoginModal()">Admin</button>
+
+      </div>
+</div>
+
+<div id="loginModal" class="login-modal">
+    <div class="modal-content">
+      <h3>Admin Login</h3>
+      <input type="password" id="adminPassword" placeholder="Enter password" />
+      <div class="modal-buttons">
+        <button onclick="checkPassword()">Submit</button>
+        <button onclick="closeLoginModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+  
+    const firebaseConfig = {
+        apiKey: "AIzaSyDM08PbY2agccbecoyBe4sAgjO2jH00x8E",
+        authDomain: "restaurant-website-32bf6.firebaseapp.com",
+        databaseURL: "https://restaurant-website-32bf6-default-rtdb.firebaseio.com",
+        projectId: "restaurant-website-32bf6",
+        storageBucket: "restaurant-website-32bf6.firebasestorage.app",
+        messagingSenderId: "493995884129",
+        appId: "1:493995884129:web:3edff4b4aa4583f0917420",
+        measurementId: "G-0S5XT6D3X7"
+      };
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const ordersRef = collection(db, "orders");
+  
+    document.addEventListener('DOMContentLoaded', function () {
+      const plusButtons = document.querySelectorAll('.counter-btn.plus');
+      const minusButtons = document.querySelectorAll('.counter-btn.minus');
+      const selectedItemsContainer = document.querySelector('.selected-items');
+      const totalBillAmount = document.querySelector('.total-bill-amount');
+      const emptyCartMessage = document.querySelector('.empty-cart');
+      const checkoutBtn = document.querySelector('.checkout-btn');
+      const menuItems = document.querySelectorAll('.menu-item');
+  
+      let cart = [];
+      let orderId = null;
+  
+      function generateOrderId() {
+        return 'order-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
+      }
+  
+      function updateTotalBill() {
+        let total = 0;
+        cart.forEach(item => {
+          total += item.price * item.quantity;
+        });
+  
+        totalBillAmount.textContent = `Rs.${total.toFixed(2)}`;
+        emptyCartMessage.style.display = cart.length === 0 ? 'block' : 'none';
+  
+        selectedItemsContainer.innerHTML = '';
+        if (cart.length === 0) {
+          selectedItemsContainer.appendChild(emptyCartMessage);
+        } else {
+          cart.forEach(item => {
+            const selectedItem = document.createElement('div');
+            selectedItem.classList.add('selected-item');
+            selectedItem.innerHTML = `
+              <div class="selected-item-info">
+                <div class="selected-item-title">${item.name}</div>
+                <div class="selected-item-quantity">x${item.quantity}</div>
+              </div>
+              <div class="selected-item-price">Rs.${(item.price * item.quantity).toFixed(2)}</div>
+            `;
+            selectedItemsContainer.appendChild(selectedItem);
+          });
+        }
+  
+        if (cart.length > 0 && !orderId) {
+          orderId = generateOrderId();
+        } else if (cart.length === 0) {
+          orderId = null;
+        }
+      }
+  
+      function updateCart(id, name, price, quantity) {
+        const existingIndex = cart.findIndex(item => item.id === id);
+        if (existingIndex !== -1) {
+          if (quantity === 0) {
+            cart.splice(existingIndex, 1);
+          } else {
+            cart[existingIndex].quantity = quantity;
+          }
+        } else if (quantity > 0) {
+          cart.push({ id, name, price, quantity });
+        }
+  
+        updateTotalBill();
+        localStorage.setItem('restaurantCart', JSON.stringify(cart));
+        if (orderId) {
+          localStorage.setItem('restaurantOrderId', orderId);
+        } else {
+          localStorage.removeItem('restaurantOrderId');
+        }
+      }
+  
+      plusButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          const menuItem = this.closest('.menu-item');
+          const counterValue = this.parentElement.querySelector('.counter-value');
+          let count = parseInt(counterValue.textContent) + 1;
+          counterValue.textContent = count;
+  
+          const id = menuItem.dataset.id;
+          const name = menuItem.dataset.name;
+          const price = parseFloat(menuItem.dataset.price);
+          updateCart(id, name, price, count);
+        });
+      });
+  
+      minusButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          const menuItem = this.closest('.menu-item');
+          const counterValue = this.parentElement.querySelector('.counter-value');
+          let count = parseInt(counterValue.textContent);
+          if (count > 0) {
+            count -= 1;
+            counterValue.textContent = count;
+  
+            const id = menuItem.dataset.id;
+            const name = menuItem.dataset.name;
+            const price = parseFloat(menuItem.dataset.price);
+            updateCart(id, name, price, count);
+          }
+        });
+      });
+  
+      checkoutBtn.addEventListener('click', async function () {
+        if (cart.length > 0) {
+          try {
+            const orderData = {
+              orderId,
+              items: cart,
+              total: parseFloat(totalBillAmount.textContent.replace('Rs.', '')),
+              timestamp: new Date()
+            };
+  
+            await addDoc(ordersRef, orderData);
+  
+            alert(`Thank you for your order!\nOrder ID: ${orderId}`);
+            cart = [];
+            orderId = null;
+            document.querySelectorAll('.counter-value').forEach(v => v.textContent = '0');
+            updateTotalBill();
+            localStorage.removeItem('restaurantCart');
+            localStorage.removeItem('restaurantOrderId');
+          } catch (error) {
+            console.error("Firebase error:", error);
+            alert("Failed to place order. Try again.");
+          }
+        } else {
+          alert('Please add items to your cart before checking out.');
+        }
+      });
+  
+      // Load saved cart
+      const savedCart = localStorage.getItem('restaurantCart');
+      if (savedCart) {
+        cart = JSON.parse(savedCart);
+        orderId = localStorage.getItem('restaurantOrderId');
+        cart.forEach(item => {
+          const menuItem = document.querySelector(`.menu-item[data-id="${item.id}"]`);
+          if (menuItem) {
+            const counterValue = menuItem.querySelector('.counter-value');
+            counterValue.textContent = item.quantity;
+          }
+        });
+        updateTotalBill();
+      }
+    });
+  </script>
+  <script src="https://cdn.botpress.cloud/webchat/v2.4/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2025/05/04/09/20250504091710-HHJC3RRE.js"></script>
+  <!--
+  <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+        <df-messenger
+          chat-title="DINE-BOT"
+          agent-id="2bdc689a-2071-43f5-a53f-64a1a122798b"
+          language-code="en"
+        ></df-messenger>-->
+
+        <script>
+            function openLoginModal() {
+              document.getElementById('loginModal').style.display = 'flex';
+            }
+            
+            function closeLoginModal() {
+              document.getElementById('loginModal').style.display = 'none';
+            }
+            
+            function checkPassword() {
+              const entered = document.getElementById('adminPassword').value;
+              const correct = "rrr123"; // your chosen password
+            
+              if (entered === correct) {
+                window.location.href = "admin.html";
+              } else {
+                alert("Incorrect password!");
+              }
+            }
+            </script>
+            
+
+</body>
+</html>

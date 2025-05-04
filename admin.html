@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Page</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    .header {
+      background-color: #333;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 2em;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      padding: 40px;
+    }
+
+    .button-container button {
+      padding: 15px 30px;
+      font-size: 1em;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .button-container button:hover {
+      background-color: #0056b3;
+    }
+    a {
+        color: inherit !important;
+        text-decoration: none !important;
+      }
+  </style>
+</head>
+<body>
+
+  <div class="header">Admin</div>
+
+  <div class="button-container">
+    <button onclick="location.href='orders.html'"><a href="orders.html">Orders </a></button>
+    <button onclick="location.href='reservations.html'"><a href="resh.html">Reservations</a></button>
+  </div>
+
+</body>
+</html>
