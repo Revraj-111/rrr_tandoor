@@ -56,14 +56,14 @@
 
         // Map through items and display the id, name, price, and quantity
         const itemsList = data.items ? data.items.map(item => 
-            `<li>ID: ${item.id}, Name: ${item.name}, Price: $${item.price}, Quantity: ${item.quantity}</li>`
+            `<li>ID: ${item.id}, Name: ${item.name}, Price: Rs.${item.price}, Quantity: ${item.quantity}</li>`
         ).join("") : "No items available";
 
         row.innerHTML = `
             <td><ul>${itemsList}</ul></td> <!-- Display items as a list with id, name, price, quantity -->
             <td>${data.orderId || "N/A"}</td> <!-- Order ID -->
             <td>${new Date(data.timestamp?.seconds * 1000).toLocaleString() || "N/A"}</td> <!-- Timestamp -->
-            <td>${data.total || "N/A"}</td> <!-- Total -->
+            <td>Rs.${data.total || "N/A"}</td> <!-- Total -->
             <td><button class="btn btn-danger" onclick="deleteRow('${doc.id}')">Delete</button></td>
         `;
 
